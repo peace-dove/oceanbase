@@ -88,8 +88,7 @@ int ObTransformMinMax::check_transform_validity(ObTransformerCtx &ctx,
     OPT_TRACE("stmt has recusive cte or hierarchical query");
   } else if (select_stmt->get_from_item_size() != 1 || select_stmt->get_from_item(0).is_joined_
              || select_stmt->get_aggr_item_size() < 1 || !select_stmt->is_scala_group_by()
-             || select_stmt->is_contains_assignment()
-             || (select_stmt->get_aggr_item_size() > 1 && select_stmt->get_semi_info_size() > 0)) {
+             || select_stmt->is_contains_assignment()) {
     OPT_TRACE("not a simple aggr query");
   } else if (OB_FAIL(select_stmt->has_rownum(has_rownum))) {
     LOG_WARN("failed to check if select stmt has rownum", K(ret));
